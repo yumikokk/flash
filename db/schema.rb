@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(version: 20151122015234) do
     t.decimal  "w52high",               precision: 8, scale: 2
     t.decimal  "erMove",                precision: 4, scale: 2, default: 0.0
     t.decimal  "erChange",              precision: 4, scale: 2, default: 0.0
-    t.decimal  "avgChg",                precision: 4, scale: 2
     t.decimal  "trend",                 precision: 6, scale: 2
     t.decimal  "MFI",                   precision: 6, scale: 2, default: 0.0
     t.decimal  "insider",               precision: 4, scale: 2

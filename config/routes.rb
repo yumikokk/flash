@@ -7,6 +7,10 @@ Rails.application.routes.draw do
 
   post 'erstks/symbol' => 'erstks#symbol', as: :symbol
 
+  post 'erstks/erdate' => 'erstks#erdate', as: :erdate
+
+  get 'erstks/this_week' => 'erstks#this_week', as: :this_week
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
