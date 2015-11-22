@@ -13,13 +13,21 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: 5
-  username: root
-  password: 
-  host: localhost
 
 development:
   <<: *default
-  database: flash_development
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  # username: root
+  # database: flash_development 
+  # host: localhost
+  # socket: /tmp/mysql.sock
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  host: <%= ENV['DB_URL'] %>
+  database: isc
+  port: 3306
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -49,6 +57,8 @@ test:
 #
 production:
   <<: *default
-  database: flash_production
-  username: flash
-  password: <%= ENV['FLASH_DATABASE_PASSWORD'] %>
+  database: isc
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  host: <%= ENV['DB_URL'] %>
+  port: 3306
