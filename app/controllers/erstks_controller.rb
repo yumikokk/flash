@@ -6,10 +6,11 @@ class ErstksController < ApplicationController
 	end
 
 	def symbol
-		p params
 		tick = params["tick"]
-		first_stock = Erstk.where(tick:tick).first
-		render json: first_stock
+		stock = StockQuote::Stock.quote(tick)
+		recent_data = Erstk.where(tick:tick).order('erDate DESC')
+		recent_stock = { er:recent_data[0], realtime:stock }
+		render json: recent_stock
 	end
 
 	def erDate 
