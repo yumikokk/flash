@@ -9,7 +9,7 @@ class ErstksController < ApplicationController
 		tick = params["tick"]
 		stock = StockQuote::Stock.quote(tick)
 		recent_data = Erstk.where(tick:tick).order('erDate DESC')
-		recent_stock = { er:recent_data[0], realtime:stock }
+		recent_stock = { er:recent_data[0], realtime:stock, performance: recent_data[1..4]}
 		render json: recent_stock
 	end
 
