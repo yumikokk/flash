@@ -13,10 +13,22 @@ class ErstksController < ApplicationController
 		render json: recent_stock
 	end
 
-	def erDate 
-		erDate = params["erDate"]
-		stocks = Erstk.where(erDate: '2015-11-2306:30:00')
-		render json: stocks
+	def erdate 
+		morning_stocks = Erstk.where(erDate: '2015-11-30 06:30:00')
+		afternoon_stocks = Erstk.where(erDate: '2015-11-30 16:30:00')
+		am_stocks = []
+		pm_stocks = []
+		morning_stocks.each do |stock|
+			obj = { tick: stock.tick, er_date: stock.erDate, erMove: stock.erMove, cap: stock.marketCapM}
+			am_stocks.push(obj)
+		end
+		afternoon_stocks.each do |stock|
+			obj = { tick: stock.tick, er_date: stock.erDate, erMove: stock.erMove, cap: stock.marketCapM}
+			pm_stocks.push(obj)
+		end
+		format_stocks = {am:am_stocks, pm:pm_stocks}
+		
+		render json: format_stocks
 	end
 
 	def this_week
