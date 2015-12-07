@@ -13,34 +13,84 @@ class ErstksController < ApplicationController
 		render json: recent_stock
 	end
 
-	def erdate 
-		morning_stocks = Erstk.where(erDate: '2015-11-30 06:30:00')
-		afternoon_stocks = Erstk.where(erDate: '2015-11-30 16:30:00')
-		am_stocks = []
-		pm_stocks = []
-		morning_stocks.each do |stock|
-			obj = { tick: stock.tick, er_date: stock.erDate, erMove: stock.erMove, cap: stock.marketCapM}
-			am_stocks.push(obj)
-		end
-		afternoon_stocks.each do |stock|
-			obj = { tick: stock.tick, er_date: stock.erDate, erMove: stock.erMove, cap: stock.marketCapM}
-			pm_stocks.push(obj)
-		end
-		format_stocks = {am:am_stocks, pm:pm_stocks}
-		
-		render json: format_stocks
+	def monday
+		today = Date.today
+		monday_am_str = today.beginning_of_week.strftime('%Y-%m-%d 06:30:00')
+		monday_am = Erstk.where(erDate: monday_am_str)
+		format_stocks = { am: monday_am }
+		render json: format_stocks	
 	end
 
-	def this_week
-		# today = Date.today
-		# if today.saturday?
-		# 	week_begin = today + 2
-		# elsif today.sunday?
-		# 	week_begin = today + 1
-		# else
-		# 	week_begin = today
-		# end
-		# stocks = Erstk.where(erDate:today)	
+	def monday_pm
+		today = Date.today
+		monday_pm_str = today.beginning_of_week.strftime('%Y-%m-%d 16:30:00')
+		monday_pm = Erstk.where(erDate: monday_pm_str)
+		format_stocks = { pm: monday_pm }
+		render json: format_stocks	
+	end
+
+	def tuesday
+		today = Date.today
+		tuesday_am_str = (today.beginning_of_week + 1).strftime('%Y-%m-%d 06:30:00')
+		tuesday_am = Erstk.where(erDate: tuesday_am_str)
+		format_stocks = { am: tuesday_am }
+		render json: format_stocks	
+	end
+
+	def tuesday_pm
+		today = Date.today
+		tuesday_pm_str = (today.beginning_of_week + 1).strftime('%Y-%m-%d 16:30:00')
+		tuesday_pm = Erstk.where(erDate: tuesday_pm_str)
+		format_stocks = { pm: tuesday_pm }
+		render json: format_stocks	
+	end
+
+	def wednesday
+		today = Date.today
+		wednesday_am_str = (today.beginning_of_week + 2).strftime('%Y-%m-%d 06:30:00')
+		wednesday_am = Erstk.where(erDate: wednesday_am_str)
+		format_stocks = { am: wednesday_am }
+		render json: format_stocks	
+	end
+
+	def wednesday_pm
+		today = Date.today
+		wednesday_pm_str = (today.beginning_of_week + 2).strftime('%Y-%m-%d 16:30:00')
+		wednesday_pm = Erstk.where(erDate: wednesday_pm_str)
+		format_stocks = { pm: wednesday_pm }
+		render json: format_stocks	
+	end
+
+	def thursday
+		today = Date.today
+		thursday_am_str = (today.beginning_of_week + 3).strftime('%Y-%m-%d 06:30:00')
+		thursday_am = Erstk.where(erDate: thursday_am_str)
+		format_stocks = { am: thursday_am }
+		render json: format_stocks	
+	end
+
+	def thursday_pm
+		today = Date.today
+		thursday_pm_str = (today.beginning_of_week + 3).strftime('%Y-%m-%d 16:30:00')
+		thursday_pm = Erstk.where(erDate: thursday_pm_str)
+		format_stocks = { pm: thursday_pm }
+		render json: format_stocks	
+	end
+
+	def friday
+		today = Date.today
+		friday_am_str = (today.beginning_of_week + 4).strftime('%Y-%m-%d 06:30:00')
+		friday_am = Erstk.where(erDate: friday_am_str)
+		format_stocks = { am: friday_am}
+		render json: format_stocks	
+	end
+
+	def friday_pm
+		today = Date.today
+		friday_pm_str = (today.beginning_of_week + 4).strftime('%Y-%m-%d 16:30:00')
+		friday_pm = Erstk.where(erDate: friday_pm_str)
+		format_stocks = { pm: friday_pm }
+		render json: format_stocks	
 	end
 
 end
